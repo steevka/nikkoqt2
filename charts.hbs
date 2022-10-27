@@ -1,0 +1,17 @@
+{{!< default}}
+
+{{!-- Personal profile based on profile page--}}
+{{#get "pages" filter="tag:hash-profile" limit="1" as |profile|}}
+  {{!-- Show the profile --}}
+  {{#foreach profile}}
+    {{> hero-profile }}
+
+    {{!-- Page content from Admin --}}
+    {{content}}
+  {{/foreach}}
+{{/get}}
+
+{{!-- Latest posts --}}
+<div class="flex m-t-lg m-b">
+
+</div>

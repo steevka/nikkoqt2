@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+  {{!-- Hero --}}
+  {{> post-hero 
+    wide_img=true
+    full_img=false
+    img_bg=false
+  }}
+  
+  <article class="{{post_class}} content-wrap post-access-{{visibility}}">
+    <div class="content">
+      {{#if access}}
+        {{content}}
+      {{else}}
+        {{> content-cta}}
+      {{/if}}
+    </div>
+  </article>
+{{/post}}

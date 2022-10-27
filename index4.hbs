@@ -1,0 +1,48 @@
+{{!< default}}
+
+{{!-- Newsletter overlay --}}
+{{> intro}}
+
+{{!-- Featured posts section --}}
+{{> featured}}
+
+{{!-- Posts --}}
+<div class="row">
+  <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+    <div class="grid post-feed js-post-feed" data-post-feed="{{#if @custom.post_feed_style}}{{@custom.post_feed_style}}{{else}}list{{/if}}">
+      {{#foreach posts}}
+        {{> post-card 
+          show_img=true 
+          show_access=false
+          show_excerpt=true
+          is_reversed=false
+        }}
+      {{/foreach}}
+    </div>
+  </div>
+</div>
+
+{{!-- Load more posts --}}
+<div class="col-xs-12 center-xs m-t-lg m-b-lg">
+  <button class="btn btn--wide btn--filled js-load-more">
+    {{t "Load more posts"}}
+  </button>
+</div>
+
+{{!-- Explore Topics --}}
+{{#get "tags" include="count.posts" order="count.posts desc" limit="4"}}
+  <div class="flex m-b">
+    <div class="section__title flex-1">{{t "Explore topics"}}</div>
+    {{#link href="/tags/" class="btn--view"}}
+      <span class="m-r-sm">{{t "View all"}}</span> 
+      {{> icon name="arrow-right" size="xs"}}
+    {{/link}}
+  </div>
+  <div class="row">
+    {{#foreach tags}}
+      <div class="col-xs-12 col-sm-6 col-md-3 m-b-lg">
+        {{> tag-card show_img=true class="h-100"}}
+      </div>
+    {{/foreach}}
+  </div>
+{{/get}}

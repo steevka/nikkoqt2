@@ -1,0 +1,95 @@
+{{!-- Site header --}}
+<header class="header js-header {{#if @custom.header_position}}is-{{@custom.header_position}}{{/if}}">
+  <div class="container wrapper w-100">
+    <div class="row">
+      <div class="col-xs col-lg-8 header__left flex items-center">
+        {{!-- Site logo or title --}}
+        {{#link href=@site.url class="header__brand"}}
+          {{#if @site.logo}}
+            {{!-- Site logo --}}
+            <img class="header__logo"
+              src="{{img_url @site.logo size="s"}}"
+              alt="{{@site.title}}"/>
+          {{else}}
+            {{!-- Site Title --}}
+            <span class="header__title m-0 p-0">{{@site.title}}</span>
+          {{/if}}
+        {{/link}}
+        
+        <nav class="header__menu items-center">
+          {{!-- Main navigation --}}
+          {{navigation}}
+
+          {{!-- Secondary navigation --}}
+          {{#if @site.secondary_navigation}}
+            {{!-- Secondary Navigation Button --}}
+            <button class="header__dropdown--toggle flex flex-cc js-dropdown-menu-toggle"
+              type="button" title="{{t "More"}}" aria-label="{{t "More"}}">
+              {{> icon name="dots" size="sm"}}
+            </button>
+            <div class="header__dropdown js-dropdown">
+              {{navigation type="secondary"}}
+            </div>
+          {{/if}}
+        </nav>
+      </div>
+
+      <div class="col-xs col-lg-4 header__right items-center content-end">
+        {{!-- Theme Toggle --}}
+        <button class="header__theme--toggle btn-theme-toggle js-theme-toggle"
+          title="{{t "Theme Toggle"}}" aria-label="{{t "Theme Toggle"}}" type="button">
+          {{> icon name="brightness-up" size="sm"}}
+          {{> icon name="brightness-down" size="sm"}}
+        </button>
+
+        {{!-- Search toggle --}}
+        {{!-- <button class="header__search--toggle flex-cc js-search-open"
+          type="button" title="{{t "Search"}}" aria-label="{{t "Search"}}">
+          {{> icon name="search" size="sm"}}
+        </button> --}}
+
+        {{!-- Native search --}}
+        <button class="header__search--toggle flex-cc" data-ghost-search
+          type="button" title="{{t "Search"}}" aria-label="{{t "Search"}}">
+          {{> icon name="search" size="sm"}}
+        </button>
+
+        {{!-- Sign up Button --}}
+        {{#if @member.paid}}
+        {{else if @member}}
+          {{#link href="/account/" class="upgrade-link"}}{{t "Upgrade"}}{{/link}}
+          {{!-- Portal link --}}
+          {{!-- {{#link href="/account/" data-portal="account" class="upgrade-link"}}{{t "Upgrade"}}{{/link}} --}}
+        {{else}}
+          {{#link href="/signin/" class="signin-link"}}{{t "Log In"}}{{/link}}
+          {{!-- Portal link --}}
+          {{!-- {{#link href="/signin/" data-portal="signin" class="signin-link"}}{{t "Log In"}}{{/link}} --}}
+
+          {{#link href="/signup/" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}}
+          {{!-- Portal link --}}
+          {{!-- {{#link href="/signup/" data-portal="signup" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}} --}}
+        {{/if}}
+
+        {{!-- Menu Button --}}
+        <button class="header__menu--toggle flex-cc js-menu-toggle"
+          type="button" title="{{t "Menu"}}" aria-label="{{t "Menu"}}">
+          {{> icon name="menu" size="sm"}}
+          {{> icon name="x" size="sm"}}
+        </button>
+
+        {{!-- User Menu on Mobile --}}
+        <button class="header__user--toggle flex-cc js-member-btn{{#if @member}} is-member{{else}} is-not-member{{/if}}" 
+            title="{{#if @member}}{{customer.name}}{{else}}{{t "Menu"}}{{/if}}" 
+            aria-label="{{#if @member}}{{customer.name}}{{else}}{{t "Menu"}}{{/if}}">
+          {{#if @member}}
+            <img class="header__user-avatar" 
+              src="{{@member.avatar_image}}"
+              alt="{{@member.name}}"/>
+          {{/if}}
+          {{> icon name="user" size="sm"}}
+        </button>
+        {{> mobile-user-menu}}
+      </div>
+    </div>
+  </div>
+</header>

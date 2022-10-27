@@ -1,0 +1,152 @@
+<aside class="sidebar">
+  {{!-- About --}}
+  {{^is "post"}} {{!-- don't show it on the post layout --}}
+    <div class="sidebar__section border-1">
+      <div class="sidebar__title">{{@site.title}}</div>
+      <div class="sidebar__content p">
+        <div class="sidebar__descr">{{@site.description}}</div>
+        {{>social-links}}
+      </div>
+    </div>
+  {{/is}}
+
+  {{!-- Primary author --}}
+  {{!-- {{#is "post"}}
+    {{#primary_author}}
+      {{> author-card class="m-b-lg"}}
+    {{/primary_author}}
+  {{/is}} --}}
+
+  {{!-- Subscribe--}}
+  {{#is "post"}}
+    {{#if @member.paid}}
+    {{else if @member}}
+      <div class="sidebar__section p-xs bg-gradient border-1">
+        <div class="sidebar__subscribe flex flex-col bg-default">
+          <h4 class="text-center text-xl text-acc-1">{{t "Premium Membership"}}</h4>
+          <div class="m-b text-acc-3">{{t "Unlock full access to see the entire library by subscribing to a paid plan."}}</div> 
+          {{#link href="/membership" class="btn btn--primary btn--xs self-align-center"}}{{t "Upgrade"}}{{/link}}
+        </div>
+      </div>
+    {{else}}
+      <div class="sidebar__section is-rel flex flex-cc p-xs bg-gradient border-1">
+        {{#if @site.icon}}
+          <img class="lazyload sidebar__icon"
+            data-src="{{img_url @site.icon size="xs"}}"
+            src="{{img_url @site.icon size="xxs"}}"
+            alt="{{@site.title}}"/>
+        {{/if}}
+        <div class="sidebar__subscribe bg-default">
+          <h4 class="text-center text-acc-1 fw-800">{{@site.title}} {{t "Newsletter"}}</h4>
+          <div class="m-b text-acc-3">{{t "Get the latest insights directly to your inbox!"}}</div>
+          {{> subscribe-form 
+            button_class="btn--gradient"
+          }}
+        </div>
+      </div>
+    {{/if}}
+  {{/is}}
+
+  {{!-- Sidebar featured posts --}}
+  {{#is "post"}}
+    {{#get "posts" filter="featured:true+id:-{{comment_id}}" limit="5" include="authors,tags" as |featured|}}
+      {{#if posts}}
+      <div class="sidebar__section border-1">
+        <div class="sidebar__title">{{t "Featured posts"}}</div>
+        {{#foreach featured}}
+          {{#link href=(url) class="sidebar-story"}}
+            {{#if feature_image}}
+              <div class="sidebar-story__media m-r">
+                <img 
+                  class="lazyload" 
+                  data-sizes="auto"
+                  data-src="{{img_url feature_image size="xs"}}"
+                  src="{{img_url feature_image size="xxs"}}"
+                  alt="{{title}}"
+                />
+              </div>
+            {{/if}}
+            <div class="sidebar-story__content">
+              <h3 class="sidebar-story__title">{{title}}</h3>
+
+              <div class="sidebar-story__info">
+                <time datetime="{{date format='YYYY-MM-DD'}}" class="sidebar-story__date">
+                  {{date published_at format="DD MMM YYYY"}}
+                </time>
+              </div>
+            </div>
+          {{/link}}
+        {{/foreach}}
+      </div>
+      {{/if}}
+    {{/get}}
+  {{/is}}
+
+  {{!-- Sidebar featured posts --}}
+  {{^is "post"}}
+    {{#get "posts" filter="featured:true" limit="5" include="authors,tags" as |featured|}}
+      {{#if posts}}
+      <div class="sidebar__section border-1">
+        <div class="sidebar__title">{{t "Featured posts"}}</div>
+        {{#foreach featured}}
+          {{#link href=(url) class="sidebar-story"}}
+            {{#if feature_image}}
+              <div class="sidebar-story__media m-r">
+                <img 
+                  class="lazyload" 
+                  data-sizes="auto"
+                  data-src="{{img_url feature_image size="xs"}}"
+                  src="{{img_url feature_image size="xxs"}}"
+                  alt="{{title}}"
+                />
+              </div>
+            {{/if}}
+            <div class="sidebar-story__content">
+              <h3 class="sidebar-story__title">{{title}}</h3>
+
+              <div class="sidebar-story__info">
+                <time datetime="{{date format='YYYY-MM-DD'}}" class="sidebar-story__date">
+                  {{date published_at format="DD MMM YYYY"}}
+                </time>
+              </div>
+            </div>
+          {{/link}}
+        {{/foreach}}
+      </div>
+      {{/if}}
+    {{/get}}
+  {{/is}}
+
+  {{!-- Sidebar latest posts --}}
+  {{#is "post"}}
+    {{#get "posts" filter="featured:false+id:-{{comment_id}}" limit="3" include="authors,tags" as |latest|}}
+    <div class="sidebar__section border-1">   
+      <div class="sidebar__title">{{t "Latest posts"}}</div>   
+      {{#foreach latest}}
+        {{#link href=(url) class="sidebar-story"}}
+          {{#if feature_image}}
+            <div class="sidebar-story__media m-r">
+              <img 
+                class="lazyload" 
+                data-sizes="auto"
+                data-src="{{img_url feature_image size="xs"}}"
+                src="{{img_url feature_image size="xxs"}}"
+                alt="{{title}}"
+              />
+            </div>
+          {{/if}}
+          <div class="sidebar-story__content">
+            <h3 class="sidebar-story__title">{{title}}</h3>
+
+            <div class="sidebar-story__info">
+              <time datetime="{{date format='YYYY-MM-DD'}}" class="sidebar-story__date">
+                {{date published_at format="DD MMM YYYY"}}
+              </time>
+            </div>
+          </div>
+        {{/link}}
+      {{/foreach}}
+    </div>
+    {{/get}}
+  {{/is}}
+</aside>

@@ -1,0 +1,60 @@
+{{!< default}}
+
+{{!-- Featured posts section --}}
+{{> featured}}
+
+{{!-- Posts --}}
+<div class="grid post-feed js-post-feed" data-post-feed="{{#if @custom.post_feed_style}}{{@custom.post_feed_style}}{{else}}grid{{/if}}">
+  {{#foreach posts}}
+    {{> post-card 
+      show_img=true 
+      show_access=false
+      show_excerpt=true
+    }}
+  {{/foreach}}
+</div>
+
+{{!-- Load more posts --}}
+<div class="col-xs-12 center-xs m-t-lg m-b-lg">
+  <button class="btn btn--wide btn--filled js-load-more">
+    {{t "Load more posts"}}
+  </button>
+</div>
+
+{{!-- List of author cards --}}
+{{#get "authors" include="count.posts" order="count.posts desc" limit="3"}}
+  <div class="flex m-t-lg m-b">
+    <div class="section__title flex-1">{{t "Authors"}}</div>
+    {{#link href="/authors/" class="btn--view"}}
+      <span class="m-r-sm">{{t "View all"}}</span> 
+      {{> icon name="arrow-right" size="xs"}}
+    {{/link}}
+  </div>
+  <div class="row">
+    {{#foreach authors}}
+      {{#if count.posts}}
+        <div class="col-xs-12 col-md-6 col-lg-4 m-b-lg">
+          {{> author-card class="h-100"}}
+        </div>
+      {{/if}}
+    {{/foreach}}
+  </div>
+{{/get}}
+
+{{!-- Explore Topics --}}
+{{#get "tags" include="count.posts" order="count.posts desc" limit="4"}}
+  <div class="flex m-t-lg m-b">
+    <div class="section__title flex-1">{{t "Explore topics"}}</div>
+    {{#link href="/tags/" class="btn--view"}}
+      <span class="m-r-sm">{{t "View all"}}</span> 
+      {{> icon name="arrow-right" size="xs"}}
+    {{/link}}
+  </div>
+  <div class="row">
+    {{#foreach tags}}
+      <div class="col-xs-12 col-sm-6 col-md-3 m-b-lg">
+        {{> tag-card show_img=true class="h-100"}}
+      </div>
+    {{/foreach}}
+  </div>
+{{/get}}

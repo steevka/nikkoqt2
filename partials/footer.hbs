@@ -1,0 +1,69 @@
+{{!-- Site footer --}}
+<footer class="footer">
+  <div class="container wrapper">
+    {{!-- Footer Top --}}
+    {{^is "signin, signup"}}
+    <div class="footer__top">
+      <div class="row">
+        <div class="col-xs-12 col-md-4 footer__el">
+          {{!-- Site title / logo --}}
+          {{#if @site.logo}}
+            <img class="footer__logo lazyload"
+              src="{{img_url @site.logo size="s"}}"
+              alt="{{@site.title}}"/>
+          {{else}}
+            <span class="footer__title">{{@site.title}}</span>
+          {{/if}}
+
+          {{!-- Site description --}}
+          <div class="footer__description m-b">
+            {{@site.description}}
+          </div>
+
+          {{!-- Footer social --}}
+          <div class="footer__social">
+            {{> social-links}}
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 footer__el">
+          <span class="footer__title">{{t "Navigation"}}</span>
+          
+          {{!-- Footer nav --}}
+          <div class="row">
+            <div class="col-xs-6">
+              {{!-- Main --}}
+              {{navigation}}
+            </div>
+            
+            <div class="col-xs-6">
+              {{!-- Secondary --}}
+              {{#if @site.secondary_navigation}}
+                {{navigation type="secondary"}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 footer__el">
+          {{#unless member}}
+            <span id="footer-input-label" class="footer__title m-b">{{t "Subscribe"}}</span>
+
+            {{> subscribe-form  
+              input_label="footer-input-label"
+              button_text=(t 'Join now') 
+              button_class="btn--gradient"
+            }}
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+    {{/is}}
+
+    {{!-- Footer Bottom --}}
+    <div class="footer__bottom text-center">
+      <span>&copy;{{date format="YYYY"}}&nbsp;{{#link href=@site.url}}{{@site.title}}{{/link}}.</span>
+      <span>{{t "Published by"}}&nbsp;{{#link href="https://workwithpush.com/"}}Push&nbsp;{{/link}}{{t "using"}}&nbsp;{{#link href="https://ghost.org"}}Ghost{{/link}}&nbsp;&&nbsp;{{#link href="https://bironthemes.com/themes/nikko-ghost/"}}Nikko{{/link}}.</span>
+    </div>
+  </div>
+</footer>

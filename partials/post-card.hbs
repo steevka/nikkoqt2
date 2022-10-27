@@ -1,0 +1,114 @@
+{{!-- Post Card --}}
+<article class="post-card{{#if show_img}}{{#unless feature_image}} no-image{{/unless}}{{else}} no-image{{/if}} {{post_class}}{{#if featured}} is-featured{{/if}}{{#if class}} {{class}}{{/if}}{{#if is_reversed}} is-reversed{{/if}} js-post-card"> 
+
+  {{!-- Feature Image --}}
+  {{#if show_img}}
+    {{#if feature_image}}
+      {{#link href=(url) class="post-card__media"}}
+        <img class="lazyload post-card__img"
+          data-srcset="{{img_url feature_image size="s"}} 300w,
+                  {{img_url feature_image size="m"}} 600w"
+          srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+          data-sizes="auto"
+          data-src="{{img_url feature_image size="s"}}"
+          src="{{img_url feature_image size="xxs"}}"
+          alt="{{title}}"
+        />
+      {{/link}}
+
+      {{!-- Post access --}}
+      {{#if show_access}}
+        <span class="visibility">{{visibility}}</span>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+
+  {{!-- Post card content --}}
+  <div class="post-card__content">
+    
+    {{!-- Post Card tags  --}}
+    <div class="post-card__header flex items-center">
+      {{#foreach tags limit="1"}}
+        <a class="post-card__tag tag-{{slug}}" href="{{url}}" aria-label="{{name}}"
+          {{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}
+        >{{name}}</a>
+        {{#unless @last}}<span class="m-r-sm">,</span>{{/unless}}
+      {{/foreach}}
+      {{#if tags}}<span class="m-l-sm m-r-sm separator-dot">&bull;</span>{{/if}}
+      
+      <span class="read-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+
+      {{#if @custom.show_comment_count}}
+        {{#if comments}}
+          <span class="m-l-sm m-r-sm separator-dot">&bull;</span>
+          {{>icon name="comments" size="xs"}}
+          {{comment_count
+            empty="0"
+            singular=""
+            plural=""
+            class="m-l-xs"
+          }}
+        {{/if}}
+      {{/if}}
+    </div>
+
+    {{!-- Post Card Title --}}
+    <h2 class="post-card__title">
+      {{#link href=(url) aria-label=(title)}}{{title}}{{/link}}
+    </h2>
+
+    {{!-- Post card excerpt --}}
+    {{#if show_excerpt}}
+      {{#if excerpt}} 
+        <div class="post-card__exc m-b">
+          {{excerpt words="20"}}&hellip;
+        </div>
+      {{/if}}
+    {{/if}}
+
+    {{!-- Post Card author & date --}}
+    <div class="post-card__footer"> 
+      {{#has author="count:1"}}
+        {{#primary_author}}
+          {{#link href=(url) class="post-card__author"}}
+            {{#if profile_image}}
+              <img 
+                class="lazyload" 
+                data-sizes="auto"
+                data-src="{{img_url profile_image size="xs"}}" 
+                src="{{img_url profile_image size="xxs"}}" 
+                alt="{{name}}" 
+              />
+            {{/if}}
+          {{/link}}
+          <div class="post-card__info">
+            {{#link href=(url) class="post-card__author"}}{{name}}{{/link}}
+            <span class="m-l-sm m-r-sm separator-dot">&bull;</span>
+            <time datetime="{{date ../published_at format='YYYY-MM-DD'}}" class="post-card__date">
+              {{date ../published_at format="DD MMM YYYY"}}
+            </time>
+          </div>
+        {{/primary_author}}
+      {{else}}
+        <div class="post-card__info multi">
+          {{#foreach authors}}
+            {{#unless @first}}
+              {{#if @last}}
+                <span class="fw-600 m-l-xs m-r-xs">&</span>
+              {{else}}
+                <span class="fw-600 m-r-xs">,</span>
+              {{/if}}
+            {{/unless}}
+            {{#link href=(url) class="post-card__author"}}
+              <span class="fw-600">{{name}}</span>{{/link}}
+          {{/foreach}}
+          <span class="m-l-sm m-r-sm separator-dot">&bull;</span>
+          <time datetime="{{date published_at format='YYYY-MM-DD'}}" class="post-card__date">
+            {{date published_at format="DD MMM YYYY"}}
+          </time>
+        </div>
+      {{/has}}
+    </div>
+  </div>
+
+</article>
