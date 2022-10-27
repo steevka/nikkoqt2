@@ -16,14 +16,14 @@
     {{/unless}}
 
     {{!-- Account link --}}
-    {{#link href="/account/" class="account-link"}}
-      {{> icon name="user" size="xs"}}{{t "Account"}}
-    {{/link}}
-    
-    {{!-- Account portal --}}
-    {{!-- {{#link href="/account/" data-portal="account" class="account-link"}}
+    {{!-- {{#link href="/account/" class="account-link"}}
       {{> icon name="user" size="xs"}}{{t "Account"}}
     {{/link}} --}}
+    
+    {{!-- Account portal --}}
+    {{#link href="/account/" data-portal="account" class="account-link"}}
+      {{> icon name="user" size="xs"}}{{t "Account"}}
+    {{/link}}
 
     {{!-- Sign out link --}}
     {{#link href="javascript:" data-members-signout="" class="signout-link"}}
@@ -31,24 +31,24 @@
     {{/link}}
   {{else}}
     {{!-- Sign up link --}}
-    {{#link class="signup-link" href="/signup/"}}
+    {{!-- {{#link class="signup-link" href="/signup/"}}
       {{> icon name="arrow-up-right" size="xs"}}{{t "Sign up"}}
-    {{/link}}
+    {{/link}} --}}
 
     {{!-- Sign up portal --}}
-    {{!-- {{#link class="signup-link" data-portal="signup" href="/signup/"}}
+    {{#link class="signup-link" data-portal="signup" href="/signup/"}}
       {{> icon name="arrow-up-right" size="xs"}}{{t "Sign up"}}
-    {{/link}} --}}
-
-    {{!-- Sign in link --}}
-    {{#link class="signin-link" href="/signin/"}}
-      {{> icon name="login" size="xs"}}{{t "Sign in"}}
     {{/link}}
 
-    {{!-- Sign in portal --}}
-    {{!-- {{#link class="signin-link" data-portal="signin" href="/signin/"}}
+    {{!-- Sign in link --}}
+    {{!-- {{#link class="signin-link" href="/signin/"}}
       {{> icon name="login" size="xs"}}{{t "Sign in"}}
     {{/link}} --}}
+
+    {{!-- Sign in portal --}}
+    {{#link class="signin-link" data-portal="signin" href="/signin/"}}
+      {{> icon name="login" size="xs"}}{{t "Sign in"}}
+    {{/link}}
   {{/if}}
 
   {{!-- Dark/Light Theme --}}
