@@ -57,17 +57,17 @@
         {{!-- Sign up Button --}}
         {{#if @member.paid}}
         {{else if @member}}
-          {{#link href="/account/" class="upgrade-link"}}{{t "Upgrade"}}{{/link}}
+          {{!-- {{#link href="/account/" class="upgrade-link"}}{{t "Upgrade"}}{{/link}} --}}
           {{!-- Portal link --}}
-          {{!-- {{#link href="/account/" data-portal="account" class="upgrade-link"}}{{t "Upgrade"}}{{/link}} --}}
+          {{#link href="/account/" data-portal="account" class="upgrade-link"}}{{t "Upgrade"}}{{/link}}
         {{else}}
-          {{#link href="/signin/" class="signin-link"}}{{t "Log In"}}{{/link}}
+          {{!-- {{#link href="/signin/" class="signin-link"}}{{t "Log In"}}{{/link}} --}}
           {{!-- Portal link --}}
-          {{!-- {{#link href="/signin/" data-portal="signin" class="signin-link"}}{{t "Log In"}}{{/link}} --}}
+          {{#link href="/signin/" data-portal="signin" class="signin-link"}}{{t "Log In"}}{{/link}}
 
-          {{#link href="/signup/" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}}
+          {{!-- {{#link href="/signup/" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}} --}}
           {{!-- Portal link --}}
-          {{!-- {{#link href="/signup/" data-portal="signup" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}} --}}
+          {{#link href="/signup/" data-portal="signup" class="signup-link header-cta btn--gradient"}}{{t "Subscribe"}}{{/link}}
         {{/if}}
 
         {{!-- Menu Button --}}
