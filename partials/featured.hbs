@@ -1,5 +1,5 @@
 {{!-- Featured posts --}}
-{{#get "posts" filter="featured:true" include="authors,tags" limit="all" as |featured|}}
+{{#get "posts" filter="featured:true" include="authors,tags" limit="5" as |featured|}}
   {{#if posts}}
   <div class="featured-wrapper bg-acc-1">
     <div class="featured-control flex items-center">

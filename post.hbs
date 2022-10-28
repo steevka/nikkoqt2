@@ -2,52 +2,65 @@
 
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
-  {{!-- Hero --}}
-  {{> post-hero 
-    wide_img=true
-    full_img=false
-    img_bg=false
-  }}
+  <span class="is-rel w-100 display-block"><span class="border-top-1 is-abs w-100"></span></span>
+  <div class="m-0-auto wrapper-1080">
+    {{!-- Hero --}}
+    {{> post-hero 
+      wide_img=false
+      full_img=true
+      img_bg=false
+    }}
 
-  {{!-- Article --}}
-  <article class="{{post_class}} content-wrap post-access-{{visibility}}">
+    <div class="row">
+      <div class="col-xs-12 col-lg-8{{#unless access}} col-lg-offset-2{{/unless}}">
+        <article class="{{post_class}} content-wrap post-access-{{visibility}} no-overflow">
+          <div class="content">
+            {{#if custom_excerpt}}
+              <p class="context-excerpt text-lg">
+                {{custom_excerpt}}
+              </p>
+            {{/if}}
+            
+            {{!-- Main post content --}}
+            {{content}}
+          </div>
+        </article>
 
-    <div class="content">
-      {{#if custom_excerpt}}
-        <p class="content-excerpt">
-          {{custom_excerpt}}
-        </p>
-      {{/if}}
-      
-      {{!-- Main post content --}}
-      {{content}}
-    </div>
+        {{!-- Elements for posts (not pages) --}}
+        {{#is "post"}}
+          {{#if access}}
+            {{!-- Post tags & post sharing --}}
+            <div class="post-footer content-wrap p-t-lg m-b">
+              {{!-- Post tags --}}
+              {{> tag-list}}
 
-  </article>
+              <span class="flex-1"></span>
 
-  {{#if access}}
-    {{!-- Post tags & post sharing --}}
-    <div class="post-footer content-wrap p-t-lg m-b">
-      {{!-- Post tags --}}
-      {{> tag-list}}
-
-      <span class="flex-1"></span>
-
-      {{!-- Social sharing --}}
-      {{> social-share}}
-    </div>
-
-    {{!-- Post author card --}}
-    {{#primary_author}}
-      <div class="content-wrap">
-        {{> author-card is_wide=true}}
+              {{!-- Social sharing --}}
+              {{> social-share}}
+            </div>
+          {{/if}}
+        {{/is}}
       </div>
-    {{/primary_author}}
 
+      {{#if access}}
+        <div class="col-xs-12 col-lg-4 sidebar__wrapper">
+          {{> sidebar}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Elements for posts (not pages) --}}
+  {{#is "post"}}
     {{!-- Include Comments --}}
-    {{> comments}}
-  {{/if}}
+    {{#if access}}
+      {{> comments}}
+    {{/if}}
 
-  {{!-- Related posts --}}
-  {{> related-posts}}
+    {{!-- Related posts --}}
+    {{> related-posts}}
+  {{/is}}
+
 {{/post}}
+

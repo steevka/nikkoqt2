@@ -47,7 +47,7 @@
     {{/if}}
   {{/is}}
 
-  {{!-- Sidebar featured posts --}}
+  {{!-- Sidebar featured posts 
   {{#is "post"}}
     {{#get "posts" filter="featured:true+id:-{{comment_id}}" limit="5" include="authors,tags" as |featured|}}
       {{#if posts}}
@@ -80,7 +80,7 @@
       </div>
       {{/if}}
     {{/get}}
-  {{/is}}
+  {{/is}}--}}
 
   {{!-- Sidebar featured posts --}}
   {{^is "post"}}
