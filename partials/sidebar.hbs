@@ -119,7 +119,7 @@
 
   {{!-- Sidebar latest posts --}}
   {{#is "post"}}
-    {{#get "posts" filter="featured:false+id:-{{comment_id}}" limit="3" include="authors,tags" as |latest|}}
+    {{#get "posts" filter="featured:false+id:-{{comment_id}}" limit="5" include="authors,tags" as |latest|}}
     <div class="sidebar__section border-1">   
       <div class="sidebar__title">{{t "Latest posts"}}</div>   
       {{#foreach latest}}
