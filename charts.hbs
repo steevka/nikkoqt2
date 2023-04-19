@@ -1,17 +1,53 @@
 {{!< default}}
 
-{{!-- Personal profile based on profile page--}}
-{{#get "pages" filter="tag:hash-profile" limit="1" as |profile|}}
-  {{!-- Show the profile --}}
-  {{#foreach profile}}
-    {{> hero-profile }}
+{{! Personal profile based on profile page}}
+{{#page}}
+  {{> hero-profile }}
 
-    {{!-- Page content from Admin --}}
+  <!-- Stats section -->
+  <div class="row m-b">
+    <div class="col-xs-12 col-sm-6 col-md-3 m-b">
+      <div
+        class="stat flex flex-col flex-cc text-center radius p bg-acc-1 h-100"
+      >
+        <div class="stat_count text-20 fw-800 text-gradient">100+</div>
+        <div class="stat_text text-acc-3">Chart publications.</div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-3 m-b">
+      <div
+        class="stat flex flex-col flex-cc text-center radius p bg-acc-1 h-100"
+      >
+        <div class="stat_count text-20 fw-800 text-gradient">1,200+</div>
+        <div class="stat_text text-acc-3">Individual live charts.</div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-3 m-b">
+      <div
+        class="stat flex flex-col flex-cc text-center radius p bg-acc-1 h-100"
+      >
+        <div class="stat_count text-20 fw-800 text-gradient">70+</div>
+        <div class="stat_text text-acc-3">Years of data.</div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-3 m-b">
+      <div
+        class="stat flex flex-col flex-cc text-center radius p bg-acc-1 h-100"
+      >
+        <div class="stat_count text-20 fw-800 text-gradient">100%</div>
+        <div class="stat_text text-acc-3">Accurate numbers.</div>
+      </div>
+    </div>
+  </div>
+
+  {{#if access}}
+    {{> live-charts}}
+  {{else}}
     {{content}}
-  {{/foreach}}
-{{/get}}
+  {{/if}}
+{{/page}}
 
-{{!-- Latest posts --}}
-<div class="flex m-t-lg m-b">
-
-</div>
+<div class="flex m-t-lg m-b"></div>
