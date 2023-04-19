@@ -1,28 +1,53 @@
-{{!-- Content preview --}}
+{{! Content preview }}
 <div class="post-sneak-peek">
   {{{html}}}
 </div>
 
-{{!-- Post Access CTA --}}
+{{! Post Access CTA }}
 <div class="post-access-cta p-lg text-center border-1 {{visibility}}">
-  <h3>{{t "Read the full story"}}</h3>
+  <h3>
+    {{#has tag="#members-resource,#paid-resource"}}
+      {{t "Join QuickTakes"}}
+    {{else}}
+      {{t "Read the full story"}}
+    {{/has}}
+  </h3>
+
   {{#has visibility="members"}}
     <p class="text-acc-3">
-    {{t "Sign up now to read the full story and get access to all members-only posts."}}
-    </p>  
+      {{#has tag="#members-resource"}}
+        {{t "Become a member for free to get access to these resources."}}
+      {{else}}
+        {{t
+          "Sign up now to read the full story and get access to all members-only posts."
+        }}
+      {{/has}}
+    </p>
   {{/has}}
   {{#has visibility="paid"}}
     <p class="text-acc-3">
-      {{t "Sign up now to read the full story and get access to all paid posts."}}
+      {{#has tag="#paid-resource"}}
+        {{t "Become a premium member to get access to these resources."}}
+      {{else}}
+        {{t
+          "Sign up now to read the full story and get access to all paid posts."
+        }}
+      {{/has}}
     </p>
   {{/has}}
   {{!-- {{#link href="/signup/" class="btn btn--primary m-b"}}{{t "Subscribe"}}{{/link}} --}}
-  {{!-- Portal link --}}
-  {{#link href="/signup/" data-portal="signup" class="btn btn--primary m-b"}}{{t "Subscribe"}}{{/link}}
+  {{! Portal link }}
+  {{#link href="/signup/" data-portal="signup" class="btn btn--primary m-b"}}{{t
+      "Subscribe"
+    }}{{/link}}
   <div class="small">
-    <span>{{t "Already have an account?"}}</span> 
+    <span>{{t "Already have an account?"}}</span>
     {{!-- {{#link href="/signin/" class="post-access-alt link-no-style"}}{{t "Sign in"}}{{/link}} --}}
-    {{!-- Portal link --}}
-    {{#link href="/signin/" data-portal="signin" class="post-access-alt link-no-style"}}{{t "Sign in"}}{{/link}}
+    {{! Portal link }}
+    {{#link
+      href="/signin/"
+      data-portal="signin"
+      class="post-access-alt link-no-style"
+    }}{{t "Sign in"}}{{/link}}
   </div>
 </div>
